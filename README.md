@@ -197,8 +197,6 @@ Note:
 
 ### Deploy app with AWS Elastic Beanstalk
 
-The deployed app can be found [here](http://ft-web-f.xkiddx5py9.us-west-2.elasticbeanstalk.com/) Please note that this app may handle a small text file (i.e. around 10 hashes) at once, otherwise the server would throw an HTTP 504 error.
-
 The followings are steps to deploy the app on AWS.
 
 Step 1: install EB CLI:
