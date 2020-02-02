@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+	<!-- Customized CSS -->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+
+    <title>VirusScanner</title>
+</head>
+
+<body>
+    <nav class="navbar bg-dark navbar-dark">
+        <div class="container">
+            <a href="" class="navbar-brand">VirusScanner</a>
+        </div>
+    </nav>
+
+    <section id="header" class="jumbotron">
+        <div class="container">
+			<h1 class="text-center">Virus Report Generator</h1>
+			<div class="my-5">
+				<p class="lead">A free website that allows users to upload a text file which contains a list of hashes values, automatically query information from VirusTotal, and generate a virus scan report</p>
+				<p><strong>How to use:</strong></p>
+				<ul>
+					<li>
+						Click on <em>Browse</em> button to choose a text file from your local machine 
+					</li>
+					<li>
+						Click on <em>Generate Report</em> button to upload and generate a scan report
+					</li>
+				</ul>
+			</div>
+            
+            <form method="POST" action="/" enctype="multipart/form-data">
+                <div class="input-group mt-3">
+                    <div class="custom-file">
+                        <input type="file" name="file" class="custom-file-input" id="inputfile">
+                        <label class="custom-file-label" for="inputfile">Choose file</label>
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-success" type="submit">Generate Report</button>
+                    </div>
+                </div>
+			</form>
+			<p>
+				{% with messages = get_flashed_messages() %}
+					{% if messages %}
+					<ul class=flashes>
+					{% for message in messages %}
+						<li>{{ message }}</li>
+					{% endfor %}
+					</ul>
+					{% endif %}
+				{% endwith %}
+			</p>
+        </div>
+    </section>
+
+    <section id="table">
+        {% block content %}{% endblock %}
+    </section>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
