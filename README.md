@@ -229,7 +229,7 @@ This pipeline will contain three 3 steps: getting source from github repository,
 
 - Follow the image below to configure your pipeline
 
-<img src='imgs/jenkins-pipeline-configuration.png' width='300px' class="center">
+<img src='imgs/jenkins-pipeline-configuration.png' class="center">
 
 - To push the image to Docker, we need to store Docker Hub credential in Jenkins
 
@@ -237,10 +237,11 @@ This pipeline will contain three 3 steps: getting source from github repository,
 
 2. Fill your docker hub credential in the form and click OK.
 
-<img src='imgs/jenkins-dockerhub-cred.png' width='300px' class='center'>
+<img src='imgs/jenkins-dockerhub-cred.png' class='center'>
 
-3. Go back to Dashboard, click the pipeline and Build Now.
+3. Go back to Dashboard, click the pipeline and Build Now and you will see the build result shown in the image below.
 
+<img src='imgs/jenkins-build-result.png' class='center'>
 
 ### Deploy app with AWS Elastic Beanstalk
 
