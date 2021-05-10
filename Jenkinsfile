@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Build docker image') {
             steps {
-                sh 'docker build -t ft-flask:${env.BUILD_TAG} .'
+                sh 'docker build -t ft-flask:latest .'
             }
         }
         stage('Run docker image') {
