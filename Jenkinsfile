@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {  
+        registryCredential = 'dockerhub' 
+        dockerImage = '' 
+    }
     stages {
         stage('Get Source') {
             // copy source code from local file system and test
@@ -17,7 +21,7 @@ pipeline {
             steps {
                 // sh 'docker build -t ft-flask:latest .'
                 script {
-                    def dockerImage = docker.build("jc2592/virus-scanner-flask:${env.BUILD_TAG}")
+                    dockerImage = docker.build("jc2592/virus-scanner-flask:${env.BUILD_TAG}")
                 }
             }
         }
@@ -26,10 +30,10 @@ pipeline {
         //         sh 'docker run -d -p 5000:5000 --name flask-container ft-flask'
         //     }
         // }
-        stage('Push Docker Image'){
+        stage('Deploy Docker Image'){
             steps {
                 script {
-                    docker.withRegistry('', 'dockerhub') {
+                    docker.withRegistry('', registryCredential) {
                         dockerImage.push()
                         dockerImage.push('latest')
                     }
