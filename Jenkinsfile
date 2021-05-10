@@ -6,8 +6,10 @@ pipeline {
             // for a Dockerfile to build the Docker image
             steps {
                 git ('https://github.com/jchen9314/virus_scanner_flask_app.git')
-                if (!fileExists("Dockerfile")) {
-                     error('Dockerfile missing.')
+                script {
+                    if (!fileExists("Dockerfile")) {
+                        error('Dockerfile missing.')
+                    }
                 }
             }
         }
