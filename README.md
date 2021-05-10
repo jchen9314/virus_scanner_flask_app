@@ -144,13 +144,13 @@ Step 2. Click the `Generate Report` button to upload and generate a query report
 
 Python packages:
 
-- Flask==1.1.1
-- Jinja2==2.10.3
-- numpy==1.17.4
-- pandas==0.25.3
-- requests==2.22.0
-- Werkzeug==0.16.0
-- gevent==1.4.0
+- Flask==1.1.2
+- Jinja2==2.11.3
+- numpy==1.20.2
+- pandas==1.2.4
+- requests==2.25.1
+- Werkzeug==1.0.1
+- gevent==21.1.2
 
 ## Dockerize the application
 
@@ -193,6 +193,53 @@ Note:
 	sudo systemctl start docker
 	sudo systemctl enable docker
 	```
+### Build CI/CD pipeline with Jenkins
+
+Here I will use docker-compose.yml to launch Jenkins image. The difference between Dockerfile and docker compose is that Dockerfile is a text file that consists of commands a user could call to build a docker image whereas docker compose is a tool connecting and running multiple containers/microservices.
+
+Step 1: Launch Jenkins image:
+
+```
+docker-compose up
+```
+
+Step 2: Initialize Jenkins plugins
+
+- Click [here](http://127.0.0.1:8081/) to open Jenkins
+
+- Login using the password shown in your Terminal like the image below
+
+<img src="imgs/jenkins-pswd.png" class="center">
+
+- Click Install suggested plugins
+
+- Create admin user and launch the Jenkins dashboard
+
+- Set up Docker in Jenkins
+
+1. Add docker plugin: click Manage Jenkins, and click Manange Plugins; inside plugin manager, click Available tab and search for Docker Pipeline, docker-build-step, CloudBees Docker Build and Publish plugin and install them.
+
+2. Back to dashboard, click Global Tool Configuration and scroll down to Docker, give a Docker name like myDocker and click Install automatically and Save.
+
+Step 3: Build a pipeline:
+
+This pipeline will contain three 3 steps: getting source from github repository, building a docker image and deploying it to Docker Hub.
+
+- Click New Item on the dashboard, enter an item name like <i>virus-scanner-pipeline</i> and select Pipeline
+
+- Follow the image below to configure your pipeline
+
+<img src='imgs/jenkins-pipeline-configuration.png' width='300px' class="center">
+
+- To push the image to Docker, we need to store Docker Hub credential in Jenkins
+
+1. Go to Manage Jenkins, select Manage Credentials, click Jenkins inside the table <i>Stores scoped to Jenkins</i>, click Global credentials and adding some credentials
+
+2. Fill your docker hub credential in the form and click OK.
+
+<img src='imgs/jenkins-dockerhub-cred.png' width='300px' class='center'>
+
+3. Go back to Dashboard, click the pipeline and Build Now.
 
 
 ### Deploy app with AWS Elastic Beanstalk

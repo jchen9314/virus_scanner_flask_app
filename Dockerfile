@@ -1,5 +1,4 @@
 FROM ubuntu:latest
-MAINTAINER Jason Chen "jyc7115@gmail.com"
 
 # install Python 3
 RUN apt-get update \
