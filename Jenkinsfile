@@ -17,7 +17,7 @@ pipeline {
             steps {
                 // sh 'docker build -t ft-flask:latest .'
                 script {
-                    dockerImage = docker.build("jc2592/virus-scanner-flask:latest")
+                    def dockerImage = docker.build("jc2592/virus-scanner-flask:${env.BUILD_TAG}")
                 }
             }
         }
@@ -29,7 +29,7 @@ pipeline {
         stage('Push Docker Image'){
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                    docker.withRegistry('', 'dockerhub') {
                         dockerImage.push()
                         dockerImage.push('latest')
                     }
