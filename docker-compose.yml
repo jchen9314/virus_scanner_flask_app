@@ -1,0 +1,15 @@
+# adapt from https://github.com/in28minutes/devops-master-class/blob/master/jenkins/docker-compose.yml
+version: '3.2'
+services:
+  jenkins:
+    image:  jenkinsci/blueocean:latest
+    privileged: true
+    user: root
+    ports:
+      - 8081:8080
+      - 50000:50000
+    container_name: jenkins
+    volumes:
+      - /tmp/jenkins:/var/jenkins_home #Remember that, the tmp directory is designed to be wiped on system reboot.
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/local/bin/docker:/usr/local/bin/docker
