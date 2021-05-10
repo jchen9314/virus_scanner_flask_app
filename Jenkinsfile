@@ -1,6 +1,7 @@
 pipeline {
     agent any
-    environment {  
+    environment { 
+        registry = "jc2592/virus-scanner-flask" 
         registryCredential = 'dockerhub' 
         dockerImage = '' 
     }
@@ -21,7 +22,7 @@ pipeline {
             steps {
                 // sh 'docker build -t ft-flask:latest .'
                 script {
-                    dockerImage = docker.build("jc2592/virus-scanner-flask:${env.BUILD_TAG}")
+                    dockerImage = docker.build registry + ":$BUILD_TAG"
                 }
             }
         }
